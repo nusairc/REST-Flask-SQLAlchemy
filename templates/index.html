@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System</title>
+</head>
+<body>
+    <h1>Employee List</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Salary</th>
+            <th>Action</th>
+        </tr>
+        {% for employee in employees %}
+        <tr>
+            <td>{{ employee.employee_id }}</td>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.salary }}</td>
+            <td>
+                <form method="POST" action="/employee/{{ employee.employee_id }}/update">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required value="{{ employee.name }}"><br><br>
+                    <label for="salary">Salary:</label>
+                    <input type="number" id="salary" name="salary" required value="{{ employee.salary }}"><br><br>
+                    <button type="submit">Update</button>
+                </form>
+                <form method="POST" action="/employee/{{ employee.employee_id }}/delete">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Add New Employee</h2>
+    <form method="POST" action="/employee/create">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="salary">Salary:</label>
+        <input type="number" id="salary" name="salary" required><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
